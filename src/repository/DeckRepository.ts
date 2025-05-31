@@ -4,11 +4,11 @@ import { prisma } from "../main/config/prisma.js";
 import { DeckRepositoryInterface } from "./interface/DeckRepositoryInterface.js";
 
 export class DeckRepository implements DeckRepositoryInterface {
-    async create(deckData: any): Promise<boolean> {
+    async create(deckData:any): Promise<boolean> {
         try {
-            await prisma.deck.create({
+            await prisma.posts.create({
                 data: deckData
-            });
+            })
             return true;
         } catch (error) {
             throw new Error(`Error creating deck: ${error}`);
@@ -17,9 +17,15 @@ export class DeckRepository implements DeckRepositoryInterface {
     async findAll(): Promise<Deck[]> {
         return await prisma.deck.findMany();
     }
-    findById(deckId: number): Promise<Deck | null> {
-        throw new Error("Method not implemented.");
+
+    async findById(deckId: number): Promise<Deck | null> {
+        return await prisma.deck.findUnique({
+            where: {
+                id: deckId
+            }
+        });
     }
+    
     addCardToDeck(deckId: number, card: Card): Promise<boolean> {
         throw new Error("Method not implemented.");
     }

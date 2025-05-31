@@ -2,9 +2,10 @@ import { Deck } from "../entity/Deck.js";
 import { DeckRepositoryInterface } from "../repository/interface/DeckRepositoryInterface.js";
 
 export class CreateDeckUsecase{
-    constructor(private DeckRepository: DeckRepositoryInterface, private deckData: Deck){}
+    constructor(private DeckRepository: DeckRepositoryInterface){}
 
-    async execute(): Promise<boolean> {
-        return await this.DeckRepository.create(this.deckData)
+    async execute(name: string, description?: string): Promise<boolean> {
+
+        return await this.DeckRepository.create({name, description})
     }
 }

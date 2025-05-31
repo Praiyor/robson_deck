@@ -2,12 +2,12 @@ import { Card } from "./Card.js";
 
 export class Deck {
   private id?: number;
-  private title: string;
+  private name: string;
   private description?: string | null;
   private cards: Card[];
 
-  constructor(title: string, description?: string) {
-    this.title = title;
+  constructor(name: string, description?: string) {
+    this.name = name;
     this.description = description ?? null;
     this.cards = [];
   }
@@ -16,7 +16,7 @@ export class Deck {
     return this.id;
   }
   getTitle(): string {
-    return this.title;
+    return this.name;
   }
   getDescription(): string | null {
     return this.description ?? null;

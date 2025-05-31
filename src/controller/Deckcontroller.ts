@@ -3,8 +3,9 @@ import { CreateDeckUsecase } from "../usecase/CreateDeckUsecase.js";
 import { DeckRepository } from "../repository/DeckRepository.js";
 import { DeckRepositoryInterface } from "../repository/interface/DeckRepositoryInterface.js";
 import { Deck } from "../entity/Deck.js";
-import { deckSchema } from "./schema/deckSchema.js";
+import { deckIdSchema, deckSchema } from "./schema/deckSchema.js";
 import { GetAllDecksUseCase } from "../usecase/GetAllDecksUseCase.js";
+import { GetDeckByIdUseCase } from "../usecase/GetDeckbyIdUsecase.js";
 
 
 export class Deckcontroller{
@@ -16,12 +17,11 @@ export class Deckcontroller{
                 res.status(400).json({error: parseResult.error.errors[0].message});
                 return
             }
-            const { title, description} = parseResult.data;
+            const { name, description} = parseResult.data;
 
-            const deck = new Deck(title, description);
-            const createDeckUsecase = new CreateDeckUsecase(this.getDeckRepository(), deck);
+            const createDeckUsecase = new CreateDeckUsecase(this.getDeckRepository());
 
-            const createdDeck:boolean = await createDeckUsecase.execute();
+            const createdDeck:boolean = await createDeckUsecase.execute(name, description);
 
             if(!createdDeck){
                 res.status(500).json({ error: "Failed to create deck" });
@@ -48,7 +48,28 @@ export class Deckcontroller{
     }
 
     static async getDeckById(req: Request, res: Response) {
+        try {
+            const rawParams = { deckId: Number(req.params.deckId) };
+            const parseResult = deckIdSchema.safeParse(rawParams);
 
+            if (!parseResult.success) {
+                res.status(400).json({ error: parseResult.error.errors[0].message });
+                return;
+            }
+
+            const { deckId } = parseResult.data;
+            const useCase = new GetDeckByIdUseCase(this.getDeckRepository());
+            const deck = await useCase.execute(deckId);
+
+            if(!deck){
+                throw new Error("Deck not found");
+            }
+
+            res.status(200).json(deck);
+            
+        } catch (error: any) {
+            res.status(500).json({ error: error.message });
+        }
     }
 
     static async addCardToDeck(req: Request, res: Response) {
