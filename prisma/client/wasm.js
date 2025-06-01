@@ -128,7 +128,9 @@ exports.Prisma.DeckScalarFieldEnum = {
 
 exports.Prisma.CardScalarFieldEnum = {
   id: 'id',
-  content: 'content',
+  name: 'name',
+  description: 'description',
+  image: 'image',
   deckId: 'deckId'
 };
 

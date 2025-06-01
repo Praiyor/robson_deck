@@ -1,11 +1,14 @@
 import { Request, Response } from "express";
-import { CreateDeckUsecase } from "../usecase/CreateDeckUsecase.js";
+import { CreateDeckUsecase } from "../usecase/Deck/CreateDeckUsecase.js";
 import { DeckRepository } from "../repository/DeckRepository.js";
 import { DeckRepositoryInterface } from "../repository/interface/DeckRepositoryInterface.js";
 import { Deck } from "../entity/Deck.js";
 import { deckIdSchema, deckSchema } from "./schema/deckSchema.js";
-import { GetAllDecksUseCase } from "../usecase/GetAllDecksUseCase.js";
-import { GetDeckByIdUseCase } from "../usecase/GetDeckbyIdUsecase.js";
+import { GetAllDecksUseCase } from "../usecase/Deck/GetAllDecksUseCase.js";
+import { GetDeckByIdUseCase } from "../usecase/Deck/GetDeckbyIdUsecase.js";
+import { GetCardApiUsecase } from "../usecase/Card/GetCardApiUsecase.js";
+import { CardRepositoryInterface } from "../repository/interface/CardRepositoryInterface.js";
+import { CardRepository } from "../repository/CardRepository.js";
 
 
 export class Deckcontroller{
@@ -73,6 +76,26 @@ export class Deckcontroller{
     }
 
     static async addCardToDeck(req: Request, res: Response) {
+        try {
+            const deckId = Number(req.params.deckId)
+            const cardName = req.body.cardName
+
+            if(!cardName || !deckId || typeof deckId !== 'number' || typeof cardName !== 'string') {
+                res.status(400).json({ error: "Invalid parameters" });
+                return;
+            }
+
+            const getCardApiUsecase = new GetCardApiUsecase(this.getCardRepository(), this.getDeckRepository());
+            const card = await getCardApiUsecase.execute(cardName, deckId);
+
+            res.status(201).json({
+                message: "Card added to deck successfully",
+                card: card
+            });
+
+        } catch (error: any) {
+            res.status(500).json({error: error.message})
+        }
 
     }
 
@@ -82,5 +105,9 @@ export class Deckcontroller{
 
     static getDeckRepository(): DeckRepositoryInterface{
         return new DeckRepository();
+    }
+
+    static getCardRepository(): CardRepositoryInterface{
+        return new CardRepository();
     }
 }

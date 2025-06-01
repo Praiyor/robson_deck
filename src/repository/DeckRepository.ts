@@ -22,13 +22,13 @@ export class DeckRepository implements DeckRepositoryInterface {
         return await prisma.deck.findUnique({
             where: {
                 id: deckId
+            },
+            include: {
+                cards: true 
             }
         });
     }
     
-    addCardToDeck(deckId: number, card: Card): Promise<boolean> {
-        throw new Error("Method not implemented.");
-    }
     removeCardFromDeck(deckId: number, cardId: number): Promise<boolean> {
         throw new Error("Method not implemented.");
     }

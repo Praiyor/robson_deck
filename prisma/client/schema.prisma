@@ -16,8 +16,10 @@ model Deck {
 }
 
 model Card {
-  id      Int    @id
-  content String
-  deckId  Int
-  deck    Deck   @relation(fields: [deckId], references: [id])
+  id          Int    @id
+  name        String
+  description String
+  image       String
+  deckId      Int
+  deck        Deck   @relation(fields: [deckId], references: [id])
 }

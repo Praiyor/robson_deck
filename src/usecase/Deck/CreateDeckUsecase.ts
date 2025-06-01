@@ -1,5 +1,5 @@
-import { Deck } from "../entity/Deck.js";
-import { DeckRepositoryInterface } from "../repository/interface/DeckRepositoryInterface.js";
+import { Deck } from "../../entity/Deck.js";
+import { DeckRepositoryInterface } from "../../repository/interface/DeckRepositoryInterface.js";
 
 export class CreateDeckUsecase{
     constructor(private DeckRepository: DeckRepositoryInterface){}

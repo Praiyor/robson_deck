@@ -2092,19 +2092,25 @@ export namespace Prisma {
 
   export type CardMinAggregateOutputType = {
     id: number | null
-    content: string | null
+    name: string | null
+    description: string | null
+    image: string | null
     deckId: number | null
   }
 
   export type CardMaxAggregateOutputType = {
     id: number | null
-    content: string | null
+    name: string | null
+    description: string | null
+    image: string | null
     deckId: number | null
   }
 
   export type CardCountAggregateOutputType = {
     id: number
-    content: number
+    name: number
+    description: number
+    image: number
     deckId: number
     _all: number
   }
@@ -2122,19 +2128,25 @@ export namespace Prisma {
 
   export type CardMinAggregateInputType = {
     id?: true
-    content?: true
+    name?: true
+    description?: true
+    image?: true
     deckId?: true
   }
 
   export type CardMaxAggregateInputType = {
     id?: true
-    content?: true
+    name?: true
+    description?: true
+    image?: true
     deckId?: true
   }
 
   export type CardCountAggregateInputType = {
     id?: true
-    content?: true
+    name?: true
+    description?: true
+    image?: true
     deckId?: true
     _all?: true
   }
@@ -2227,7 +2239,9 @@ export namespace Prisma {
 
   export type CardGroupByOutputType = {
     id: number
-    content: string
+    name: string
+    description: string
+    image: string
     deckId: number
     _count: CardCountAggregateOutputType | null
     _avg: CardAvgAggregateOutputType | null
@@ -2252,32 +2266,40 @@ export namespace Prisma {
 
   export type CardSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    content?: boolean
+    name?: boolean
+    description?: boolean
+    image?: boolean
     deckId?: boolean
     deck?: boolean | DeckDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["card"]>
 
   export type CardSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    content?: boolean
+    name?: boolean
+    description?: boolean
+    image?: boolean
     deckId?: boolean
     deck?: boolean | DeckDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["card"]>
 
   export type CardSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    content?: boolean
+    name?: boolean
+    description?: boolean
+    image?: boolean
     deckId?: boolean
     deck?: boolean | DeckDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["card"]>
 
   export type CardSelectScalar = {
     id?: boolean
-    content?: boolean
+    name?: boolean
+    description?: boolean
+    image?: boolean
     deckId?: boolean
   }
 
-  export type CardOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "content" | "deckId", ExtArgs["result"]["card"]>
+  export type CardOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "image" | "deckId", ExtArgs["result"]["card"]>
   export type CardInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     deck?: boolean | DeckDefaultArgs<ExtArgs>
   }
@@ -2295,7 +2317,9 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      content: string
+      name: string
+      description: string
+      image: string
       deckId: number
     }, ExtArgs["result"]["card"]>
     composites: {}
@@ -2722,7 +2746,9 @@ export namespace Prisma {
    */
   interface CardFieldRefs {
     readonly id: FieldRef<"Card", 'Int'>
-    readonly content: FieldRef<"Card", 'String'>
+    readonly name: FieldRef<"Card", 'String'>
+    readonly description: FieldRef<"Card", 'String'>
+    readonly image: FieldRef<"Card", 'String'>
     readonly deckId: FieldRef<"Card", 'Int'>
   }
     
@@ -3163,7 +3189,9 @@ export namespace Prisma {
 
   export const CardScalarFieldEnum: {
     id: 'id',
-    content: 'content',
+    name: 'name',
+    description: 'description',
+    image: 'image',
     deckId: 'deckId'
   };
 
@@ -3296,14 +3324,18 @@ export namespace Prisma {
     OR?: CardWhereInput[]
     NOT?: CardWhereInput | CardWhereInput[]
     id?: IntFilter<"Card"> | number
-    content?: StringFilter<"Card"> | string
+    name?: StringFilter<"Card"> | string
+    description?: StringFilter<"Card"> | string
+    image?: StringFilter<"Card"> | string
     deckId?: IntFilter<"Card"> | number
     deck?: XOR<DeckScalarRelationFilter, DeckWhereInput>
   }
 
   export type CardOrderByWithRelationInput = {
     id?: SortOrder
-    content?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    image?: SortOrder
     deckId?: SortOrder
     deck?: DeckOrderByWithRelationInput
   }
@@ -3313,14 +3345,18 @@ export namespace Prisma {
     AND?: CardWhereInput | CardWhereInput[]
     OR?: CardWhereInput[]
     NOT?: CardWhereInput | CardWhereInput[]
-    content?: StringFilter<"Card"> | string
+    name?: StringFilter<"Card"> | string
+    description?: StringFilter<"Card"> | string
+    image?: StringFilter<"Card"> | string
     deckId?: IntFilter<"Card"> | number
     deck?: XOR<DeckScalarRelationFilter, DeckWhereInput>
   }, "id">
 
   export type CardOrderByWithAggregationInput = {
     id?: SortOrder
-    content?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    image?: SortOrder
     deckId?: SortOrder
     _count?: CardCountOrderByAggregateInput
     _avg?: CardAvgOrderByAggregateInput
@@ -3334,7 +3370,9 @@ export namespace Prisma {
     OR?: CardScalarWhereWithAggregatesInput[]
     NOT?: CardScalarWhereWithAggregatesInput | CardScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Card"> | number
-    content?: StringWithAggregatesFilter<"Card"> | string
+    name?: StringWithAggregatesFilter<"Card"> | string
+    description?: StringWithAggregatesFilter<"Card"> | string
+    image?: StringWithAggregatesFilter<"Card"> | string
     deckId?: IntWithAggregatesFilter<"Card"> | number
   }
 
@@ -3383,42 +3421,56 @@ export namespace Prisma {
 
   export type CardCreateInput = {
     id: number
-    content: string
+    name: string
+    description: string
+    image: string
     deck: DeckCreateNestedOneWithoutCardsInput
   }
 
   export type CardUncheckedCreateInput = {
     id: number
-    content: string
+    name: string
+    description: string
+    image: string
     deckId: number
   }
 
   export type CardUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    content?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
     deck?: DeckUpdateOneRequiredWithoutCardsNestedInput
   }
 
   export type CardUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    content?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
     deckId?: IntFieldUpdateOperationsInput | number
   }
 
   export type CardCreateManyInput = {
     id: number
-    content: string
+    name: string
+    description: string
+    image: string
     deckId: number
   }
 
   export type CardUpdateManyMutationInput = {
     id?: IntFieldUpdateOperationsInput | number
-    content?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
   }
 
   export type CardUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    content?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
     deckId?: IntFieldUpdateOperationsInput | number
   }
 
@@ -3563,7 +3615,9 @@ export namespace Prisma {
 
   export type CardCountOrderByAggregateInput = {
     id?: SortOrder
-    content?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    image?: SortOrder
     deckId?: SortOrder
   }
 
@@ -3574,13 +3628,17 @@ export namespace Prisma {
 
   export type CardMaxOrderByAggregateInput = {
     id?: SortOrder
-    content?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    image?: SortOrder
     deckId?: SortOrder
   }
 
   export type CardMinOrderByAggregateInput = {
     id?: SortOrder
-    content?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    image?: SortOrder
     deckId?: SortOrder
   }
 
@@ -3774,12 +3832,16 @@ export namespace Prisma {
 
   export type CardCreateWithoutDeckInput = {
     id: number
-    content: string
+    name: string
+    description: string
+    image: string
   }
 
   export type CardUncheckedCreateWithoutDeckInput = {
     id: number
-    content: string
+    name: string
+    description: string
+    image: string
   }
 
   export type CardCreateOrConnectWithoutDeckInput = {
@@ -3813,7 +3875,9 @@ export namespace Prisma {
     OR?: CardScalarWhereInput[]
     NOT?: CardScalarWhereInput | CardScalarWhereInput[]
     id?: IntFilter<"Card"> | number
-    content?: StringFilter<"Card"> | string
+    name?: StringFilter<"Card"> | string
+    description?: StringFilter<"Card"> | string
+    image?: StringFilter<"Card"> | string
     deckId?: IntFilter<"Card"> | number
   }
 
@@ -3857,22 +3921,30 @@ export namespace Prisma {
 
   export type CardCreateManyDeckInput = {
     id: number
-    content: string
+    name: string
+    description: string
+    image: string
   }
 
   export type CardUpdateWithoutDeckInput = {
     id?: IntFieldUpdateOperationsInput | number
-    content?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
   }
 
   export type CardUncheckedUpdateWithoutDeckInput = {
     id?: IntFieldUpdateOperationsInput | number
-    content?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
   }
 
   export type CardUncheckedUpdateManyWithoutDeckInput = {
     id?: IntFieldUpdateOperationsInput | number
-    content?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
   }
 
 
