@@ -28,8 +28,8 @@ export class DeckRepository implements DeckRepositoryInterface {
             }
         });
     }
-    
-    removeCardFromDeck(deckId: number, cardId: number): Promise<boolean> {
+
+    deleteById(deckId: number): Promise<void> {
         throw new Error("Method not implemented.");
     }
 

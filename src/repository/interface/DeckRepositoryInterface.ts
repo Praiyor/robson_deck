@@ -5,5 +5,5 @@ export interface DeckRepositoryInterface {
     create(deckData:any): Promise<boolean>;
     findAll(): Promise<Deck[]>;
     findById(deckId: number): Promise<Deck | null>;
-    removeCardFromDeck(deckId: number, cardId: number): Promise<boolean>;
+    deleteById(deckId: number): Promise<void>;
 }

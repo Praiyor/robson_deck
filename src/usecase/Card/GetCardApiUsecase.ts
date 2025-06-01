@@ -52,10 +52,6 @@ export class GetCardApiUsecase {
         if(!deck){
             throw new Error(`Deck with id ${deckId} not found.`);
         }
-
-        if (parsed.date.getTime() > Date.now()) {
-            throw new Error("Card date cannot be in the future.");
-        }
     }
 
  

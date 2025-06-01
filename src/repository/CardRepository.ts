@@ -15,14 +15,22 @@ export class CardRepository implements CardRepositoryInterface{
 
         return card;
     }
-    findAll(): Promise<Card[]> {
-        throw new Error("Method not implemented.");
+    async findAll(): Promise<Card[]> {
+        return await prisma.card.findMany()
     }
-    findById(cardId: number): Promise<Card | null> {
-        throw new Error("Method not implemented.");
+    async findById(cardId: number): Promise<Card | null> {
+        return await prisma.card.findUnique({
+            where: {
+                id: cardId
+            }
+        });
     }
-    deleteById(cardId: number): Promise<boolean> {
-        throw new Error("Method not implemented.");
+    async deleteById(cardId: number): Promise<void> {
+        await prisma.card.delete({
+            where: {
+                id: cardId
+            }
+        })
     }
 
 }
