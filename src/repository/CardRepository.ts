@@ -1,16 +1,25 @@
 import { prisma } from "../main/config/prisma.js";
+import { Card } from "../main/generated/prisma/index.js";
 import { CardRepositoryInterface } from "./interface/CardRepositoryInterface.js";
-import { Card } from '../../prisma/client/index.js';
 
 export class CardRepository implements CardRepositoryInterface{
-    async create(cardData: {
-      name: string;
-      description: string;
-      image: string;
-      deckId: number;
+    async create({id, name, description, image, deckId }: {
+        id: number;
+        name: string;
+        description: string;
+        image: string;
+        deckId: number;
     }): Promise<Card> {
         const card = await prisma.card.create({
-            data: cardData
+            data: {
+                id,
+                name,
+                description,
+                image,
+                deck: {
+                  connect: { id: deckId }
+                }
+            }
         })
 
         return card;

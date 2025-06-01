@@ -1,5 +1,5 @@
-import { Deck } from "../../../prisma/client/index.js";
-import { Card } from "../../entity/Card.js";
+import { Deck } from "../../main/generated/prisma/index.js";
+
 
 export interface DeckRepositoryInterface {
     create(deckData:any): Promise<boolean>;

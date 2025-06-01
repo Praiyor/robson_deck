@@ -4,7 +4,7 @@ import { CardRepositoryInterface } from "../../repository/interface/CardReposito
 import { CreateCardUsecase } from "./CreateCardUsecase.js";
 import { DeckRepositoryInterface } from "../../repository/interface/DeckRepositoryInterface.js";
 import { GetDeckByIdUseCase } from "../Deck/GetDeckbyIdUsecase.js";
-import { Card } from "../../../prisma/client/index.js";
+import { Card } from "../../main/generated/prisma/index.js";
 
 type cardReponse = {
     id: number;
@@ -37,6 +37,7 @@ export class GetCardApiUsecase {
         const createCardUseCase = new CreateCardUsecase(this.CardRepository);
         
         const cardCreated = await createCardUseCase.execute(
+                                            response.data.id,
                                             response.data.name,
                                             response.data.description,
                                             response.data.image,

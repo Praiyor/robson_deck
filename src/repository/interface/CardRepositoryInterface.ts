@@ -1,5 +1,4 @@
-import { Card } from "../../../prisma/client/index.js";
-
+import { Card } from "../../main/generated/prisma/index.js";
 
 export interface CardRepositoryInterface {
     create(cardDeck: any): Promise<Card>;

@@ -1,0 +1,18 @@
+### Criar um deck
+POST http://localhost:4052/decks
+Content-Type: application/json
+
+{
+  "name": "Deck do Robson",
+  "description": "Deck poderoso com cartas lendárias"
+}
+
+###
+
+### Buscar todos os decks
+GET http://localhost:4052/decks
+
+###
+
+### Buscar um deck por ID
+GET http://localhost:4052/decks/1

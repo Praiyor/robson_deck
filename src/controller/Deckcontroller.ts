@@ -21,7 +21,7 @@ export class Deckcontroller{
             }
             const { name, description} = parseResult.data;
 
-            const createDeckUsecase = new CreateDeckUsecase(this.getDeckRepository());
+            const createDeckUsecase = new CreateDeckUsecase(Deckcontroller.getDeckRepository());
 
             const createdDeck:boolean = await createDeckUsecase.execute(name, description);
 
@@ -39,7 +39,7 @@ export class Deckcontroller{
 
     static async getAllDecks(req: Request, res: Response) {
         try {
-            const deckRepository = this.getDeckRepository();
+            const deckRepository = Deckcontroller.getDeckRepository();
             const getAllDecksUsecase = new GetAllDecksUseCase(deckRepository);
             const decks = await getAllDecksUsecase.execute();
 
@@ -59,7 +59,7 @@ export class Deckcontroller{
             }
 
             const { deckId } = parseResult.data;
-            const useCase = new GetDeckByIdUseCase(this.getDeckRepository());
+            const useCase = new GetDeckByIdUseCase(Deckcontroller.getDeckRepository());
             const deck = await useCase.execute(deckId);
 
             if(!deck){
@@ -82,7 +82,7 @@ export class Deckcontroller{
                 throw new Error("Invalid parameters");
             }
 
-            const getCardApiUsecase = new GetCardApiUsecase(this.getCardRepository(), this.getDeckRepository());
+            const getCardApiUsecase = new GetCardApiUsecase(Deckcontroller.getCardRepository(), Deckcontroller.getDeckRepository());
             const card = await getCardApiUsecase.execute(cardName, deckId);
 
             res.status(201).json({
@@ -103,7 +103,7 @@ export class Deckcontroller{
             if(!deckId || !cardId || typeof deckId !== 'number' || typeof cardId !== 'number') {
                 throw new Error("Invalid parameters");
             }
-            const deleteCardUsecase = new DeleteCardUsecase(this.getCardRepository(), this.getDeckRepository());
+            const deleteCardUsecase = new DeleteCardUsecase(Deckcontroller.getCardRepository(), Deckcontroller.getDeckRepository());
             await deleteCardUsecase.execute(cardId, deckId);
 
             res.status(201).json({

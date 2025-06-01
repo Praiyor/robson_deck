@@ -1,12 +1,12 @@
-import { Deck } from "../../prisma/client/index.js";
-import { Card } from "../entity/Card.js";
 import { prisma } from "../main/config/prisma.js";
+import { Deck } from "../main/generated/prisma/index.js";
 import { DeckRepositoryInterface } from "./interface/DeckRepositoryInterface.js";
 
 export class DeckRepository implements DeckRepositoryInterface {
+    constructor() {}
     async create(deckData:any): Promise<boolean> {
         try {
-            await prisma.posts.create({
+            await prisma.deck.create({
                 data: deckData
             })
             return true;
