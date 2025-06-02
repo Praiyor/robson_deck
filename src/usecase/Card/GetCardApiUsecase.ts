@@ -48,10 +48,19 @@ export class GetCardApiUsecase {
     async validate(responseData: cardReponse, deckId: number): Promise<void> {
         const parsed = CardSchema.parse(responseData);
         const getDeckUseCase = new GetDeckByIdUseCase(this.DeckRepository);
-        const deck = await getDeckUseCase.execute(deckId)
+        const targetDeck = await getDeckUseCase.execute(deckId)
+        const existingCard = await this.CardRepository.findById(parsed.id);
 
-        if(!deck){
+        if(!targetDeck){
             throw new Error(`Deck with id ${deckId} not found.`);
+        }
+
+        if (existingCard) {
+            const originalDeck = await getDeckUseCase.execute(existingCard.deckId);
+
+            const deckName = originalDeck.name;
+            
+            throw new Error(`Card "${parsed.name}" is already in the Deck "${deckName}".`);
         }
     }
 
