@@ -9,6 +9,7 @@ import { GetCardApiUsecase } from "../usecase/Card/GetCardApiUsecase.js";
 import { CardRepositoryInterface } from "../repository/interface/CardRepositoryInterface.js";
 import { CardRepository } from "../repository/CardRepository.js";
 import { DeleteCardUsecase } from "../usecase/Card/DeleteCardUsecase.js";
+import { getFormatRule } from "../utils/DeckFormatRules.js";
 
 
 export class Deckcontroller{
@@ -16,14 +17,17 @@ export class Deckcontroller{
     static async createDeck(req: Request, res: Response) {
         try {
             const parseResult = deckSchema.safeParse(req.body);
+
             if(!parseResult.success){
                 throw new Error(parseResult.error.errors[0].message);
             }
-            const { name, description} = parseResult.data;
+            const { name, description, format } = parseResult.data;
+
+            const rules = getFormatRule(format);
 
             const createDeckUsecase = new CreateDeckUsecase(Deckcontroller.getDeckRepository());
 
-            const createdDeck:boolean = await createDeckUsecase.execute(name, description);
+            const createdDeck:boolean = await createDeckUsecase.execute(name, format, rules, description);
 
             if(!createdDeck){
                 throw new Error("Failed to create deck");

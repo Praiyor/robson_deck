@@ -1004,56 +1004,94 @@ export namespace Prisma {
 
   export type DeckAvgAggregateOutputType = {
     id: number | null
+    minCards: number | null
+    exactCards: number | null
   }
 
   export type DeckSumAggregateOutputType = {
     id: number | null
+    minCards: number | null
+    exactCards: number | null
   }
 
   export type DeckMinAggregateOutputType = {
     id: number | null
     name: string | null
     description: string | null
+    format: string | null
+    minCards: number | null
+    exactCards: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type DeckMaxAggregateOutputType = {
     id: number | null
     name: string | null
     description: string | null
+    format: string | null
+    minCards: number | null
+    exactCards: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type DeckCountAggregateOutputType = {
     id: number
     name: number
     description: number
+    format: number
+    minCards: number
+    exactCards: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
 
   export type DeckAvgAggregateInputType = {
     id?: true
+    minCards?: true
+    exactCards?: true
   }
 
   export type DeckSumAggregateInputType = {
     id?: true
+    minCards?: true
+    exactCards?: true
   }
 
   export type DeckMinAggregateInputType = {
     id?: true
     name?: true
     description?: true
+    format?: true
+    minCards?: true
+    exactCards?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type DeckMaxAggregateInputType = {
     id?: true
     name?: true
     description?: true
+    format?: true
+    minCards?: true
+    exactCards?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type DeckCountAggregateInputType = {
     id?: true
     name?: true
     description?: true
+    format?: true
+    minCards?: true
+    exactCards?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -1147,6 +1185,11 @@ export namespace Prisma {
     id: number
     name: string
     description: string | null
+    format: string
+    minCards: number | null
+    exactCards: number | null
+    createdAt: Date
+    updatedAt: Date
     _count: DeckCountAggregateOutputType | null
     _avg: DeckAvgAggregateOutputType | null
     _sum: DeckSumAggregateOutputType | null
@@ -1172,6 +1215,11 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     description?: boolean
+    format?: boolean
+    minCards?: boolean
+    exactCards?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     cards?: boolean | Deck$cardsArgs<ExtArgs>
     _count?: boolean | DeckCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["deck"]>
@@ -1180,21 +1228,36 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     description?: boolean
+    format?: boolean
+    minCards?: boolean
+    exactCards?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }, ExtArgs["result"]["deck"]>
 
   export type DeckSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
     description?: boolean
+    format?: boolean
+    minCards?: boolean
+    exactCards?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }, ExtArgs["result"]["deck"]>
 
   export type DeckSelectScalar = {
     id?: boolean
     name?: boolean
     description?: boolean
+    format?: boolean
+    minCards?: boolean
+    exactCards?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type DeckOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description", ExtArgs["result"]["deck"]>
+  export type DeckOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "format" | "minCards" | "exactCards" | "createdAt" | "updatedAt", ExtArgs["result"]["deck"]>
   export type DeckInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     cards?: boolean | Deck$cardsArgs<ExtArgs>
     _count?: boolean | DeckCountOutputTypeDefaultArgs<ExtArgs>
@@ -1211,6 +1274,11 @@ export namespace Prisma {
       id: number
       name: string
       description: string | null
+      format: string
+      minCards: number | null
+      exactCards: number | null
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["deck"]>
     composites: {}
   }
@@ -1638,6 +1706,11 @@ export namespace Prisma {
     readonly id: FieldRef<"Deck", 'Int'>
     readonly name: FieldRef<"Deck", 'String'>
     readonly description: FieldRef<"Deck", 'String'>
+    readonly format: FieldRef<"Deck", 'String'>
+    readonly minCards: FieldRef<"Deck", 'Int'>
+    readonly exactCards: FieldRef<"Deck", 'Int'>
+    readonly createdAt: FieldRef<"Deck", 'DateTime'>
+    readonly updatedAt: FieldRef<"Deck", 'DateTime'>
   }
     
 
@@ -3181,7 +3254,12 @@ export namespace Prisma {
   export const DeckScalarFieldEnum: {
     id: 'id',
     name: 'name',
-    description: 'description'
+    description: 'description',
+    format: 'format',
+    minCards: 'minCards',
+    exactCards: 'exactCards',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type DeckScalarFieldEnum = (typeof DeckScalarFieldEnum)[keyof typeof DeckScalarFieldEnum]
@@ -3256,6 +3334,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'DateTime'
+   */
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime[]'
+   */
+  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -3279,6 +3371,11 @@ export namespace Prisma {
     id?: IntFilter<"Deck"> | number
     name?: StringFilter<"Deck"> | string
     description?: StringNullableFilter<"Deck"> | string | null
+    format?: StringFilter<"Deck"> | string
+    minCards?: IntNullableFilter<"Deck"> | number | null
+    exactCards?: IntNullableFilter<"Deck"> | number | null
+    createdAt?: DateTimeFilter<"Deck"> | Date | string
+    updatedAt?: DateTimeFilter<"Deck"> | Date | string
     cards?: CardListRelationFilter
   }
 
@@ -3286,6 +3383,11 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     description?: SortOrderInput | SortOrder
+    format?: SortOrder
+    minCards?: SortOrderInput | SortOrder
+    exactCards?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     cards?: CardOrderByRelationAggregateInput
   }
 
@@ -3296,6 +3398,11 @@ export namespace Prisma {
     NOT?: DeckWhereInput | DeckWhereInput[]
     name?: StringFilter<"Deck"> | string
     description?: StringNullableFilter<"Deck"> | string | null
+    format?: StringFilter<"Deck"> | string
+    minCards?: IntNullableFilter<"Deck"> | number | null
+    exactCards?: IntNullableFilter<"Deck"> | number | null
+    createdAt?: DateTimeFilter<"Deck"> | Date | string
+    updatedAt?: DateTimeFilter<"Deck"> | Date | string
     cards?: CardListRelationFilter
   }, "id">
 
@@ -3303,6 +3410,11 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     description?: SortOrderInput | SortOrder
+    format?: SortOrder
+    minCards?: SortOrderInput | SortOrder
+    exactCards?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: DeckCountOrderByAggregateInput
     _avg?: DeckAvgOrderByAggregateInput
     _max?: DeckMaxOrderByAggregateInput
@@ -3317,6 +3429,11 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Deck"> | number
     name?: StringWithAggregatesFilter<"Deck"> | string
     description?: StringNullableWithAggregatesFilter<"Deck"> | string | null
+    format?: StringWithAggregatesFilter<"Deck"> | string
+    minCards?: IntNullableWithAggregatesFilter<"Deck"> | number | null
+    exactCards?: IntNullableWithAggregatesFilter<"Deck"> | number | null
+    createdAt?: DateTimeWithAggregatesFilter<"Deck"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Deck"> | Date | string
   }
 
   export type CardWhereInput = {
@@ -3379,6 +3496,11 @@ export namespace Prisma {
   export type DeckCreateInput = {
     name: string
     description?: string | null
+    format: string
+    minCards?: number | null
+    exactCards?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     cards?: CardCreateNestedManyWithoutDeckInput
   }
 
@@ -3386,12 +3508,22 @@ export namespace Prisma {
     id?: number
     name: string
     description?: string | null
+    format: string
+    minCards?: number | null
+    exactCards?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     cards?: CardUncheckedCreateNestedManyWithoutDeckInput
   }
 
   export type DeckUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    format?: StringFieldUpdateOperationsInput | string
+    minCards?: NullableIntFieldUpdateOperationsInput | number | null
+    exactCards?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     cards?: CardUpdateManyWithoutDeckNestedInput
   }
 
@@ -3399,6 +3531,11 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    format?: StringFieldUpdateOperationsInput | string
+    minCards?: NullableIntFieldUpdateOperationsInput | number | null
+    exactCards?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     cards?: CardUncheckedUpdateManyWithoutDeckNestedInput
   }
 
@@ -3406,17 +3543,32 @@ export namespace Prisma {
     id?: number
     name: string
     description?: string | null
+    format: string
+    minCards?: number | null
+    exactCards?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type DeckUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    format?: StringFieldUpdateOperationsInput | string
+    minCards?: NullableIntFieldUpdateOperationsInput | number | null
+    exactCards?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type DeckUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    format?: StringFieldUpdateOperationsInput | string
+    minCards?: NullableIntFieldUpdateOperationsInput | number | null
+    exactCards?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CardCreateInput = {
@@ -3515,6 +3667,28 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
   export type CardListRelationFilter = {
     every?: CardWhereInput
     some?: CardWhereInput
@@ -3534,26 +3708,45 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     description?: SortOrder
+    format?: SortOrder
+    minCards?: SortOrder
+    exactCards?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type DeckAvgOrderByAggregateInput = {
     id?: SortOrder
+    minCards?: SortOrder
+    exactCards?: SortOrder
   }
 
   export type DeckMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     description?: SortOrder
+    format?: SortOrder
+    minCards?: SortOrder
+    exactCards?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type DeckMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     description?: SortOrder
+    format?: SortOrder
+    minCards?: SortOrder
+    exactCards?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type DeckSumOrderByAggregateInput = {
     id?: SortOrder
+    minCards?: SortOrder
+    exactCards?: SortOrder
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -3606,6 +3799,36 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type DeckScalarRelationFilter = {
@@ -3667,6 +3890,18 @@ export namespace Prisma {
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
   }
 
   export type CardUpdateManyWithoutDeckNestedInput = {
@@ -3758,6 +3993,28 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -3819,7 +4076,7 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
     notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -3827,7 +4084,37 @@ export namespace Prisma {
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type CardCreateWithoutDeckInput = {
@@ -3884,12 +4171,22 @@ export namespace Prisma {
   export type DeckCreateWithoutCardsInput = {
     name: string
     description?: string | null
+    format: string
+    minCards?: number | null
+    exactCards?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type DeckUncheckedCreateWithoutCardsInput = {
     id?: number
     name: string
     description?: string | null
+    format: string
+    minCards?: number | null
+    exactCards?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type DeckCreateOrConnectWithoutCardsInput = {
@@ -3911,12 +4208,22 @@ export namespace Prisma {
   export type DeckUpdateWithoutCardsInput = {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    format?: StringFieldUpdateOperationsInput | string
+    minCards?: NullableIntFieldUpdateOperationsInput | number | null
+    exactCards?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type DeckUncheckedUpdateWithoutCardsInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    format?: StringFieldUpdateOperationsInput | string
+    minCards?: NullableIntFieldUpdateOperationsInput | number | null
+    exactCards?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CardCreateManyDeckInput = {
