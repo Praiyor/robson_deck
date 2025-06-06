@@ -12,11 +12,11 @@ import { CardSchema, CardDTO } from "../../utils/dto/CardDTO.js";
 export class GetCardApiUsecase {
     constructor(private CardRepository: CardRepositoryInterface, private DeckRepository: DeckRepositoryInterface) {}
 
-    async execute(cardName: string, deckId: number):Promise<Card>{
-        const { data: cardDTO }: AxiosResponse<CardDTO> = await axios.get(`http://localhost:3000/cards/${cardName}`);
+    async execute(cardId: number, deckId: number):Promise<Card>{
+        const { data: cardDTO }: AxiosResponse<CardDTO> = await axios.get(`http://localhost:3000/card/${cardId}`);
 
         if(!cardDTO){
-            throw new Error(`Card with name ${cardName} not found in card service.`);
+            throw new Error(`Card with id ${cardId} not found in card service.`);
         }
 
         const parsed = CardSchema.parse(cardDTO);

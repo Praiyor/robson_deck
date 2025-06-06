@@ -80,14 +80,14 @@ export class Deckcontroller{
     static async addCardToDeck(req: Request, res: Response) {
         try {
             const deckId = Number(req.params.deckId)
-            const cardName:string = req.body.cardName
+            const cardId:number = req.body.id
 
-            if(!cardName || !deckId || typeof deckId !== 'number' || typeof cardName !== 'string') {
+            if(!cardId || !deckId || typeof deckId !== 'number' || typeof cardId !== 'number') {
                 throw new Error("Invalid parameters");
             }
 
             const getCardApiUsecase = new GetCardApiUsecase(Deckcontroller.getCardRepository(), Deckcontroller.getDeckRepository());
-            const card = await getCardApiUsecase.execute(cardName, deckId);
+            const card = await getCardApiUsecase.execute(cardId, deckId);
 
             res.status(201).json({
                 message: "Card added to deck successfully",
