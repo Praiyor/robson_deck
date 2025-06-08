@@ -1,8 +1,11 @@
 import { prisma } from "../main/config/prisma.js";
 import { Deck } from "../main/generated/prisma/index.js";
+import { DeckWithCards } from "../utils/types/DeckWithCards.js";
 import { DeckRepositoryInterface } from "./interface/DeckRepositoryInterface.js";
 
+
 export class DeckRepository implements DeckRepositoryInterface {
+    
     constructor() {}
     async create(deckData:any): Promise<boolean> {
         try {
@@ -18,7 +21,7 @@ export class DeckRepository implements DeckRepositoryInterface {
         return await prisma.deck.findMany();
     }
 
-    async findById(deckId: number): Promise<Deck | null> {
+    async findById(deckId: number): Promise<DeckWithCards | null> {
         return await prisma.deck.findUnique({
             where: {
                 id: deckId
@@ -29,8 +32,29 @@ export class DeckRepository implements DeckRepositoryInterface {
         });
     }
 
-    deleteById(deckId: number): Promise<void> {
-        throw new Error("Method not implemented.");
+    async deleteById(deckId: number): Promise<void> {
+        try {
+            await prisma.deck.delete({
+                where: {
+                    id: deckId
+                }
+            });
+        } catch (error) {
+            throw new Error(`Error deleting deck with id ${deckId}: ${error.message || error}`);
+        }
+    }
+
+    async updateById(deckId: number, deckData: any): Promise<Deck | null> {
+        try {
+            return await prisma.deck.update({
+                where: {
+                    id: deckId
+                },
+                data: deckData
+            });
+        } catch (error) {
+            throw new Error(`Error updating deck with id ${deckId}: ${error.message || error}`);
+        }
     }
 
 }

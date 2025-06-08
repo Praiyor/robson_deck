@@ -15,3 +15,11 @@ export const deckIdSchema = z.object({
         invalid_type_error: "Deck ID must be a number",
     }).int().positive("Deck ID must be above 0")
 })
+
+export const deckIdParamSchema = z.object({
+  deckId: z.string()
+    .transform(Number)
+    .refine(val => Number.isInteger(val) && val > 0, {
+      message: "Deck ID must be a positive integer",
+    }),
+});

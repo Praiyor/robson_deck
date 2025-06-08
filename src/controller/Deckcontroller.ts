@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { CreateDeckUsecase } from "../usecase/Deck/CreateDeckUsecase.js";
 import { DeckRepository } from "../repository/DeckRepository.js";
 import { DeckRepositoryInterface } from "../repository/interface/DeckRepositoryInterface.js";
-import { deckIdSchema, deckSchema } from "./schema/deckSchema.js";
+import { deckIdParamSchema, deckIdSchema, deckSchema } from "./schema/deckSchema.js";
 import { GetAllDecksUseCase } from "../usecase/Deck/GetAllDecksUseCase.js";
 import { GetDeckByIdUseCase } from "../usecase/Deck/GetDeckbyIdUsecase.js";
 import { GetCardApiUsecase } from "../usecase/Card/GetCardApiUsecase.js";
@@ -10,6 +10,8 @@ import { CardRepositoryInterface } from "../repository/interface/CardRepositoryI
 import { CardRepository } from "../repository/CardRepository.js";
 import { DeleteCardUsecase } from "../usecase/Card/DeleteCardUsecase.js";
 import { getFormatRule } from "../utils/DeckFormatRules.js";
+import { DeleteDeckbyIdUsecase } from "../usecase/Deck/DeleteDeckbyIdUsecase.js";
+import { UpdateDeckbyidUsecase } from "../usecase/Deck/UpdateDeckbyIdUsecase.js";
 
 
 export class Deckcontroller{
@@ -115,6 +117,46 @@ export class Deckcontroller{
             });
         } catch (error: any) {
             res.status(500).json({error: error.message})
+        }
+    }
+
+    static async deletedeckById(req: Request, res: Response) {
+        try {
+            const {deckId} = deckIdParamSchema.parse(req.params);
+
+            const deleteDeckUsecase = new DeleteDeckbyIdUsecase(Deckcontroller.getDeckRepository());
+            await deleteDeckUsecase.execute(deckId);
+            
+            res.status(201).json({
+                message: "Deck deleted successfully",
+            });
+        } catch (error: any) {
+            res.status(500).json({error: error.message});
+        }
+    }
+
+    static async updateDeckById(req: Request, res: Response){
+        try {
+            const {deckId} = deckIdParamSchema.parse(req.params);
+            const parseResult = deckSchema.partial().safeParse(req.body);
+            if (!parseResult.success) {
+                res.status(400).json({ errors: parseResult.error.errors });
+            }
+            const deckData = parseResult.data;
+
+            let rules = null;
+            if(deckData.format){
+                rules = getFormatRule(deckData.format);
+            }
+
+            const updateDeckUsecase = new UpdateDeckbyidUsecase(Deckcontroller.getDeckRepository());
+            await updateDeckUsecase.execute(deckId, deckData.name, deckData.format, rules, deckData.description);
+
+            res.status(201).json({
+                message: "Deck updated successfully",
+            });
+        } catch (error: any) {
+            res.status(500).json({error: error.message});
         }
     }
 

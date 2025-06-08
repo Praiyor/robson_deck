@@ -26,5 +26,5 @@ model Card {
   description String
   image       String
   deckId      Int
-  deck        Deck   @relation(fields: [deckId], references: [id])
+  deck        Deck   @relation(fields: [deckId], references: [id], onDelete: Cascade)
 }

@@ -7,14 +7,13 @@ export class DeleteCardUsecase {
 
     async execute(cardId: number, deckId: number){
         await this.validate(cardId, deckId);
-
-        this.CardRepository.deleteById(cardId);
+        await this.CardRepository.deleteById(cardId);
     }
 
     async validate(cardId: number, deckId: number): Promise<void> {
         const card = await this.CardRepository.findById(cardId);
         const getDeckUseCase = new GetDeckByIdUseCase(this.DeckRepository);
-        const deck = await getDeckUseCase.execute(deckId)
+        const deck = await getDeckUseCase.execute(deckId);
 
         if(!card){
             throw new Error(`Card with id ${cardId} not found.`);

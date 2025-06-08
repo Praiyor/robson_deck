@@ -4,7 +4,8 @@ Content-Type: application/json
 
 {
   "name": "Deck do Robson",
-  "description": "Deck poderoso com cartas lendárias"
+  "description": "Deck poderoso com cartas lendárias",
+  "format": "Standard"
 }
 
 ###
@@ -15,4 +16,15 @@ GET http://localhost:4052/decks
 ###
 
 ### Buscar um deck por ID
-GET http://localhost:4052/decks/1
+GET http://localhost:4052/decks/2
+
+### Atualizar um deck
+PUT http://localhost:4052/decks/2
+Content-Type: application/json
+
+{
+  "format": "Standard"
+}
+
+### Deletar um deck
+DELETE http://localhost:4052/decks/1
