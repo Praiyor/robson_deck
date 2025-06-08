@@ -3,9 +3,9 @@ POST http://localhost:4052/decks
 Content-Type: application/json
 
 {
-  "name": "Deck do Robson",
+  "name": "Deck do Robson de commander",
   "description": "Deck poderoso com cartas lendárias",
-  "format": "Standard"
+  "format": "COMMANDER"
 }
 
 ###
@@ -19,12 +19,23 @@ GET http://localhost:4052/decks
 GET http://localhost:4052/decks/2
 
 ### Atualizar um deck
-PUT http://localhost:4052/decks/2
+PUT http://localhost:4052/decks/4
 Content-Type: application/json
 
 {
-  "format": "Standard"
+  "format": "Commander"
 }
 
 ### Deletar um deck
-DELETE http://localhost:4052/decks/1
+DELETE http://localhost:4052/decks/3
+
+### Adicionar uma carta ao deck
+POST http://localhost:4052/decks/2/cards
+Content-Type: application/json
+
+{
+  "id": 1
+}
+
+### Remover uma carta do deck
+DELETE http://localhost:4052/decks/2/cards/1

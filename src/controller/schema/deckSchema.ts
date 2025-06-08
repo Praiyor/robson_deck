@@ -1,14 +1,6 @@
 import { z } from "zod";
 import { DeckFormat } from "../../utils/DeckFormatRules.js";
 
-export const deckSchema = z.object({
-  name: z.string().min(1, "name is required"),
-  description: z.string().optional(),
-  format: z.nativeEnum(DeckFormat, {
-    errorMap: () => ({ message: "Invalid format" }),
-  }),
-});
-
 export const deckIdSchema = z.object({
     deckId: z.number({
         required_error: "Deck ID is required",
@@ -22,4 +14,35 @@ export const deckIdParamSchema = z.object({
     .refine(val => Number.isInteger(val) && val > 0, {
       message: "Deck ID must be a positive integer",
     }),
+});
+
+const formatTransformer = z
+  .string()
+  .transform((val, ctx) => {
+    const normalized = val.trim().toLowerCase();
+
+    switch (normalized) {
+      case "commander":
+        return DeckFormat.COMMANDER;
+      case "standard":
+        return DeckFormat.STANDARD;
+      case "modern":
+        return DeckFormat.MODERN;
+      case "pauper":
+        return DeckFormat.PAUPER;
+      case "singleton":
+        return DeckFormat.SINGLETON;
+      default:
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Invalid format",
+        });
+        return z.NEVER;
+    }
+  });
+  
+export const deckSchema = z.object({
+  name: z.string().min(1, "name is required"),
+  description: z.string().optional(),
+  format: formatTransformer,
 });

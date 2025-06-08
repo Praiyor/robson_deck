@@ -4,7 +4,7 @@ export const CardSchema = z.object({
   id: z.number(),
   name: z.string(),
   description: z.string(),
-  imageUrl: z.string().url(),
+  imageUrl: z.string(),
   color: z.string(),
   type: z.string(),
   category: z.string().optional(),

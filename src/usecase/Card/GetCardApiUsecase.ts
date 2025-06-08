@@ -1,5 +1,4 @@
 import axios, { AxiosResponse } from "axios";
-import { z } from "zod";
 import { CardRepositoryInterface } from "../../repository/interface/CardRepositoryInterface.js";
 import { CreateCardUsecase } from "./CreateCardUsecase.js";
 import { DeckRepositoryInterface } from "../../repository/interface/DeckRepositoryInterface.js";
