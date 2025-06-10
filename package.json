@@ -2,7 +2,7 @@
   "name": "robson-deck",
   "version": "1.0.0",
   "type": "module",
-  "scripts": {
+"scripts": {
     "dev": "tsx watch src/main/server.ts"
   },
   "keywords": [],

@@ -154,6 +154,10 @@ const config = {
         "fromEnvVar": null,
         "value": "windows",
         "native": true
+      },
+      {
+        "fromEnvVar": null,
+        "value": "debian-openssl-3.0.x"
       }
     ],
     "previewFeatures": [],
@@ -171,6 +175,7 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
@@ -179,8 +184,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/main/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Deck {\n  id          Int      @id @default(autoincrement())\n  name        String\n  description String?\n  format      String\n  minCards    Int?\n  exactCards  Int?\n  createdAt   DateTime @default(now())\n  updatedAt   DateTime @updatedAt\n  cards       Card[]\n}\n\nmodel Card {\n  id          Int    @id\n  name        String\n  description String\n  image       String\n  deckId      Int\n  deck        Deck   @relation(fields: [deckId], references: [id], onDelete: Cascade)\n}\n",
-  "inlineSchemaHash": "62a111cea23c2fffd1f50a8dd0cca158d38b1d4d7075e5c4a728ca10a3ca838e",
+  "inlineSchema": "generator client {\n  provider      = \"prisma-client-js\"\n  binaryTargets = [\"native\", \"debian-openssl-3.0.x\"]\n  output        = \"../src/main/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Deck {\n  id          Int      @id @default(autoincrement())\n  name        String\n  description String?\n  format      String\n  minCards    Int?\n  exactCards  Int?\n  createdAt   DateTime @default(now())\n  updatedAt   DateTime @updatedAt\n  cards       Card[]\n}\n\nmodel Card {\n  id          Int    @id\n  name        String\n  description String\n  image       String\n  deckId      Int\n  deck        Deck   @relation(fields: [deckId], references: [id], onDelete: Cascade)\n}\n",
+  "inlineSchemaHash": "2f15214d6f4cb37dd9a7e17b010d20517fa192fe07aba188fc41bb9e948fd6f3",
   "copyEngine": true
 }
 
@@ -221,6 +226,10 @@ Object.assign(exports, Prisma)
 // file annotations for bundling tools to include these files
 path.join(__dirname, "query_engine-windows.dll.node");
 path.join(process.cwd(), "src/main/generated/prisma/query_engine-windows.dll.node")
+
+// file annotations for bundling tools to include these files
+path.join(__dirname, "libquery_engine-debian-openssl-3.0.x.so.node");
+path.join(process.cwd(), "src/main/generated/prisma/libquery_engine-debian-openssl-3.0.x.so.node")
 // file annotations for bundling tools to include these files
 path.join(__dirname, "schema.prisma");
 path.join(process.cwd(), "src/main/generated/prisma/schema.prisma")

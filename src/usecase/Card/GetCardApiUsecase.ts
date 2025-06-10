@@ -13,7 +13,7 @@ export class GetCardApiUsecase {
     constructor(private CardRepository: CardRepositoryInterface, private DeckRepository: DeckRepositoryInterface) {}
 
     async execute(cardId: number, deckId: number):Promise<Card>{
-        const { data: cardDTO }: AxiosResponse<CardDTO> = await axios.get(`http://localhost:3000/card/${cardId}`);
+        const { data: cardDTO }: AxiosResponse<CardDTO> = await axios.get(`http://api-gateway:8080/card/${cardId}`);
 
         if(!cardDTO){
             throw new Error(`Card with id ${cardId} not found in card service.`);
