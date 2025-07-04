@@ -1,5 +1,5 @@
-import { Card } from "../../main/generated/prisma/index.js";
-import { CardRepositoryInterface } from "../../repository/interface/CardRepositoryInterface.js";
+import { Card } from "../../main/generated/prisma/index";
+import { CardRepositoryInterface } from "../../repository/interface/CardRepositoryInterface";
 
 
 export class CreateCardUsecase {

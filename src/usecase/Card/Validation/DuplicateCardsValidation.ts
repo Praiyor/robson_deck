@@ -1,8 +1,8 @@
-import { DeckRepositoryInterface } from "../../../repository/interface/DeckRepositoryInterface.js";
-import { DeckFormat } from "../../../utils/DeckFormatRules.js";
-import { CardValidationContext } from "../../../utils/dto/CardValidationContext.js";
-import { GetDeckByIdUseCase } from "../../Deck/GetDeckbyIdUsecase.js";
-import { ValidationStrategy } from "./interface/ValidationStrategy.js";
+import { DeckRepositoryInterface } from "../../../repository/interface/DeckRepositoryInterface";
+import { DeckFormat } from "../../../utils/DeckFormatRules";
+import { CardValidationContext } from "../../../utils/dto/CardValidationContext";
+import { GetDeckByIdUseCase } from "../../Deck/GetDeckbyIdUsecase";
+import { ValidationStrategy } from "./interface/ValidationStrategy";
 
 export class DuplicateCardValidation implements ValidationStrategy<CardValidationContext> {
     constructor(private deckRepository: DeckRepositoryInterface){}

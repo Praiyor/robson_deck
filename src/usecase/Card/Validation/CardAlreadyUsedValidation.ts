@@ -1,8 +1,8 @@
-import { CardRepositoryInterface } from "../../../repository/interface/CardRepositoryInterface.js";
-import { DeckRepositoryInterface } from "../../../repository/interface/DeckRepositoryInterface.js";
-import { CardValidationContext } from "../../../utils/dto/CardValidationContext.js";
-import { GetDeckByIdUseCase } from "../../Deck/GetDeckbyIdUsecase.js";
-import { ValidationStrategy } from "./interface/ValidationStrategy.js";
+import { CardRepositoryInterface } from "../../../repository/interface/CardRepositoryInterface";
+import { DeckRepositoryInterface } from "../../../repository/interface/DeckRepositoryInterface";
+import { CardValidationContext } from "../../../utils/dto/CardValidationContext";
+import { GetDeckByIdUseCase } from "../../Deck/GetDeckbyIdUsecase";
+import { ValidationStrategy } from "./interface/ValidationStrategy";
 
 export class CardAlreadyUsedValidation implements ValidationStrategy<CardValidationContext> {
     constructor(private cardRepository: CardRepositoryInterface, private deckRepository: DeckRepositoryInterface){}

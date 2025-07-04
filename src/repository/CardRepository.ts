@@ -1,6 +1,6 @@
-import { prisma } from "../main/config/prisma.js";
-import { Card } from "../main/generated/prisma/index.js";
-import { CardRepositoryInterface } from "./interface/CardRepositoryInterface.js";
+import { prisma } from "../main/config/prisma";
+import { Card } from "../main/generated/prisma/index";
+import { CardRepositoryInterface } from "./interface/CardRepositoryInterface";
 
 export class CardRepository implements CardRepositoryInterface{
     async create({id, name, description, image, deckId }: {

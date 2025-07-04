@@ -1,6 +1,6 @@
-import { CardRepositoryInterface } from "../../repository/interface/CardRepositoryInterface.js";
-import { DeckRepositoryInterface } from "../../repository/interface/DeckRepositoryInterface.js";
-import { GetDeckByIdUseCase } from "../Deck/GetDeckbyIdUsecase.js";
+import { CardRepositoryInterface } from "../../repository/interface/CardRepositoryInterface";
+import { DeckRepositoryInterface } from "../../repository/interface/DeckRepositoryInterface";
+import { GetDeckByIdUseCase } from "../Deck/GetDeckbyIdUsecase";
 
 export class DeleteCardUsecase {
     constructor(private CardRepository: CardRepositoryInterface, private DeckRepository: DeckRepositoryInterface) {}

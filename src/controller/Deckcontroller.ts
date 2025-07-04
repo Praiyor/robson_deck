@@ -1,17 +1,17 @@
 import { Request, Response } from "express";
-import { CreateDeckUsecase } from "../usecase/Deck/CreateDeckUsecase.js";
-import { DeckRepository } from "../repository/DeckRepository.js";
-import { DeckRepositoryInterface } from "../repository/interface/DeckRepositoryInterface.js";
-import { deckIdParamSchema, deckIdSchema, deckSchema } from "./schema/deckSchema.js";
-import { GetAllDecksUseCase } from "../usecase/Deck/GetAllDecksUseCase.js";
-import { GetDeckByIdUseCase } from "../usecase/Deck/GetDeckbyIdUsecase.js";
-import { GetCardApiUsecase } from "../usecase/Card/GetCardApiUsecase.js";
-import { CardRepositoryInterface } from "../repository/interface/CardRepositoryInterface.js";
-import { CardRepository } from "../repository/CardRepository.js";
-import { DeleteCardUsecase } from "../usecase/Card/DeleteCardUsecase.js";
-import { getFormatRule } from "../utils/DeckFormatRules.js";
-import { DeleteDeckbyIdUsecase } from "../usecase/Deck/DeleteDeckbyIdUsecase.js";
-import { UpdateDeckbyidUsecase } from "../usecase/Deck/UpdateDeckbyIdUsecase.js";
+import { CreateDeckUsecase } from "../usecase/Deck/CreateDeckUsecase";
+import { DeckRepository } from "../repository/DeckRepository";
+import { DeckRepositoryInterface } from "../repository/interface/DeckRepositoryInterface";
+import { deckIdParamSchema, deckIdSchema, deckSchema } from "./schema/deckSchema";
+import { GetAllDecksUseCase } from "../usecase/Deck/GetAllDecksUseCase";
+import { GetDeckByIdUseCase } from "../usecase/Deck/GetDeckbyIdUsecase";
+import { GetCardApiUsecase } from "../usecase/Card/GetCardApiUsecase";
+import { CardRepositoryInterface } from "../repository/interface/CardRepositoryInterface";
+import { CardRepository } from "../repository/CardRepository";
+import { DeleteCardUsecase } from "../usecase/Card/DeleteCardUsecase";
+import { getFormatRule } from "../utils/DeckFormatRules";
+import { DeleteDeckbyIdUsecase } from "../usecase/Deck/DeleteDeckbyIdUsecase";
+import { UpdateDeckbyidUsecase } from "../usecase/Deck/UpdateDeckbyIdUsecase";
 
 
 export class Deckcontroller{

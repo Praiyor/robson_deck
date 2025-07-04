@@ -1,6 +1,6 @@
-import { DeckRepositoryInterface } from "../../repository/interface/DeckRepositoryInterface.js";
-import { DeckFormat } from "../../utils/DeckFormatRules.js";
-import { GetDeckByIdUseCase } from "./GetDeckbyIdUsecase.js";
+import { DeckRepositoryInterface } from "../../repository/interface/DeckRepositoryInterface";
+import { DeckFormat } from "../../utils/DeckFormatRules";
+import { GetDeckByIdUseCase } from "./GetDeckbyIdUsecase";
 
 type DeckUpdateRules = {
   minCards?: number;

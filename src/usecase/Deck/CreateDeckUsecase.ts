@@ -1,5 +1,5 @@
-import { DeckRepositoryInterface } from "../../repository/interface/DeckRepositoryInterface.js";
-import { DeckFormat } from "../../utils/DeckFormatRules.js";
+import { DeckRepositoryInterface } from "../../repository/interface/DeckRepositoryInterface";
+import { DeckFormat } from "../../utils/DeckFormatRules";
 
 export class CreateDeckUsecase{
     constructor(private DeckRepository: DeckRepositoryInterface){}

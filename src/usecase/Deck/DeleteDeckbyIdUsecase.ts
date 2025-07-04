@@ -1,5 +1,5 @@
-import { DeckRepositoryInterface } from "../../repository/interface/DeckRepositoryInterface.js";
-import { GetDeckByIdUseCase } from "./GetDeckbyIdUsecase.js";
+import { DeckRepositoryInterface } from "../../repository/interface/DeckRepositoryInterface";
+import { GetDeckByIdUseCase } from "./GetDeckbyIdUsecase";
 
 export class DeleteDeckbyIdUsecase {
     constructor(private DeckRepository: DeckRepositoryInterface){}

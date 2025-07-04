@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { DeckFormat } from "../../utils/DeckFormatRules.js";
+import { DeckFormat } from "../../utils/DeckFormatRules";
 
 export const deckIdSchema = z.object({
     deckId: z.number({

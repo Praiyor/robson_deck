@@ -1,4 +1,4 @@
-import { ValidationStrategy } from "./interface/ValidationStrategy.js";
+import { ValidationStrategy } from "./interface/ValidationStrategy";
 
 export class CompositeValidator<T>{
     constructor(private strategies: ValidationStrategy<T>[]){}

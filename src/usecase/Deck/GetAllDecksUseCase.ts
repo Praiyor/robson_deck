@@ -1,6 +1,6 @@
 
-import { Deck } from "../../main/generated/prisma/index.js";
-import { DeckRepositoryInterface } from "../../repository/interface/DeckRepositoryInterface.js";
+import { Deck } from "../../main/generated/prisma/index";
+import { DeckRepositoryInterface } from "../../repository/interface/DeckRepositoryInterface";
 
 export class GetAllDecksUseCase {
     constructor(private DeckRepository: DeckRepositoryInterface){}

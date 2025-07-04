@@ -1,20 +1,20 @@
 import axios, { AxiosResponse } from "axios";
-import { CardRepositoryInterface } from "../../repository/interface/CardRepositoryInterface.js";
-import { CreateCardUsecase } from "./CreateCardUsecase.js";
-import { DeckRepositoryInterface } from "../../repository/interface/DeckRepositoryInterface.js";
-import { GetDeckByIdUseCase } from "../Deck/GetDeckbyIdUsecase.js";
-import { Card } from "../../main/generated/prisma/index.js";
-import { mapCardDTOToInternal } from "../../utils/cardMapper.js";
-import { CardSchema, CardDTO } from "../../utils/dto/CardDTO.js";
-import { DeckFormat } from "../../utils/DeckFormatRules.js";
-import { CardValidationContext } from "../../utils/dto/CardValidationContext.js";
-import { CompositeValidator } from "./Validation/CompositeValidator.js";
-import { DeckExistsValidation } from "./Validation/DeckExistsValidation.js";
-import { CardAlreadyUsedValidation } from "./Validation/CardAlreadyUsedValidation.js";
-import { MaxCardsInDeckValidation } from "./Validation/MaxCardsInDeckValidation.js";
-import { DuplicateCardValidation } from "./Validation/DuplicateCardsValidation.js";
-import { MaxCardCopiesValidation } from "./Validation/MaxCardCopiesValidation.js";
-import { CardValidatorFactory } from "./Validation/Factory/CardValidatorFactory.js";
+import { CardRepositoryInterface } from "../../repository/interface/CardRepositoryInterface";
+import { CreateCardUsecase } from "./CreateCardUsecase";
+import { DeckRepositoryInterface } from "../../repository/interface/DeckRepositoryInterface";
+import { GetDeckByIdUseCase } from "../Deck/GetDeckbyIdUsecase";
+import { Card } from "../../main/generated/prisma/index";
+import { mapCardDTOToInternal } from "../../utils/cardMapper";
+import { CardSchema, CardDTO } from "../../utils/dto/CardDTO";
+import { DeckFormat } from "../../utils/DeckFormatRules";
+import { CardValidationContext } from "../../utils/dto/CardValidationContext";
+import { CompositeValidator } from "./Validation/CompositeValidator";
+import { DeckExistsValidation } from "./Validation/DeckExistsValidation";
+import { CardAlreadyUsedValidation } from "./Validation/CardAlreadyUsedValidation";
+import { MaxCardsInDeckValidation } from "./Validation/MaxCardsInDeckValidation";
+import { DuplicateCardValidation } from "./Validation/DuplicateCardsValidation";
+import { MaxCardCopiesValidation } from "./Validation/MaxCardCopiesValidation";
+import { CardValidatorFactory } from "./Validation/Factory/CardValidatorFactory";
 
 
 export class GetCardApiUsecase {

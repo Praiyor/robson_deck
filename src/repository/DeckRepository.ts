@@ -1,7 +1,7 @@
-import { prisma } from "../main/config/prisma.js";
-import { Deck } from "../main/generated/prisma/index.js";
-import { DeckWithCards } from "../utils/types/DeckWithCards.js";
-import { DeckRepositoryInterface } from "./interface/DeckRepositoryInterface.js";
+import { prisma } from "../main/config/prisma";
+import { Deck } from "../main/generated/prisma/index";
+import { DeckWithCards } from "../utils/types/DeckWithCards";
+import { DeckRepositoryInterface } from "./interface/DeckRepositoryInterface";
 
 
 export class DeckRepository implements DeckRepositoryInterface {

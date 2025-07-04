@@ -1,5 +1,5 @@
-import { Card } from "../main/generated/prisma/index.js";
-import { CardDTO } from "./dto/CardDTO.js";
+import { Card } from "../main/generated/prisma/index";
+import { CardDTO } from "./dto/CardDTO";
 
 export function mapCardDTOToInternal(dto: CardDTO, deckId: number): Card {
   return {

@@ -1,4 +1,4 @@
-import { CardDTO } from "./CardDTO.js";
+import { CardDTO } from "./CardDTO";
 
 export interface CardValidationContext {
     card: CardDTO;

@@ -1,8 +1,8 @@
-import { CardValidationContext } from "../../../utils/dto/CardValidationContext.js";
-import { ValidationStrategy } from "./interface/ValidationStrategy.js";
-import { DeckRepositoryInterface } from "../../../repository/interface/DeckRepositoryInterface.js";
-import { GetDeckByIdUseCase } from "../../Deck/GetDeckbyIdUsecase.js";
-import { DeckFormat } from "../../../utils/DeckFormatRules.js";
+import { CardValidationContext } from "../../../utils/dto/CardValidationContext";
+import { ValidationStrategy } from "./interface/ValidationStrategy";
+import { DeckRepositoryInterface } from "../../../repository/interface/DeckRepositoryInterface";
+import { GetDeckByIdUseCase } from "../../Deck/GetDeckbyIdUsecase";
+import { DeckFormat } from "../../../utils/DeckFormatRules";
 
 export class MaxCardCopiesValidation implements ValidationStrategy<CardValidationContext> {
     constructor(private deckRepository: DeckRepositoryInterface){}

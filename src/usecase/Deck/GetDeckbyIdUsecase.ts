@@ -1,5 +1,5 @@
-import { DeckRepositoryInterface } from "../../repository/interface/DeckRepositoryInterface.js";
-import { DeckWithCards } from "../../utils/types/DeckWithCards.js";
+import { DeckRepositoryInterface } from "../../repository/interface/DeckRepositoryInterface";
+import { DeckWithCards } from "../../utils/types/DeckWithCards";
 
 export class GetDeckByIdUseCase {
     constructor(private DeckRepository: DeckRepositoryInterface){}
