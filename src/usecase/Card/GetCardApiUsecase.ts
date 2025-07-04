@@ -2,18 +2,10 @@ import axios, { AxiosResponse } from "axios";
 import { CardRepositoryInterface } from "../../repository/interface/CardRepositoryInterface";
 import { CreateCardUsecase } from "./CreateCardUsecase";
 import { DeckRepositoryInterface } from "../../repository/interface/DeckRepositoryInterface";
-import { GetDeckByIdUseCase } from "../Deck/GetDeckbyIdUsecase";
 import { Card } from "../../main/generated/prisma/index";
 import { mapCardDTOToInternal } from "../../utils/cardMapper";
 import { CardSchema, CardDTO } from "../../utils/dto/CardDTO";
-import { DeckFormat } from "../../utils/DeckFormatRules";
 import { CardValidationContext } from "../../utils/dto/CardValidationContext";
-import { CompositeValidator } from "./Validation/CompositeValidator";
-import { DeckExistsValidation } from "./Validation/DeckExistsValidation";
-import { CardAlreadyUsedValidation } from "./Validation/CardAlreadyUsedValidation";
-import { MaxCardsInDeckValidation } from "./Validation/MaxCardsInDeckValidation";
-import { DuplicateCardValidation } from "./Validation/DuplicateCardsValidation";
-import { MaxCardCopiesValidation } from "./Validation/MaxCardCopiesValidation";
 import { CardValidatorFactory } from "./Validation/Factory/CardValidatorFactory";
 
 
