@@ -85,6 +85,16 @@ jobs:
             org.opencontainers.image.version=${{ steps.meta.outputs.version }}
             org.opencontainers.image.source=https://github.com/${{ github.repository }}
 
+      - name: Versão da imagem Docker gerada
+        run: |
+          echo ""
+          echo "============================================"
+          echo "Imagem Docker gerada com as seguintes tags:"
+          echo "${{ steps.meta.outputs.tags }}"
+          echo "============================================"
+          echo ""
+          echo "::notice title=Docker Tags::${{ steps.meta.outputs.tags }}"
+
       - name: Mostrar estrutura de arquivos (modo recursivo)
         run: ls -R
 
