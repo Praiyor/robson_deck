@@ -75,6 +75,21 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ secrets.DOCKER_USERNAME }}/robson-deck
+          tags: |
+            type=ref,event=branch
+            type=semver,pattern={{version}}
+            type=sha
+          labels: |
+            org.opencontainers.image.title=robson-deck
+            org.opencontainers.image.description=Robson Deck API
+            org.opencontainers.image.version=${{ steps.meta.outputs.version }}
+            org.opencontainers.image.source=https://github.com/${{ github.repository }}
+
+      - name: Mostrar estrutura de arquivos (modo recursivo)
+        run: ls -R
+
+      - name: Mostrar arquivos no diretório atual
+        run: ls -l
 
       - name: Build e Push da imagem Docker
         uses: docker/build-push-action@v5
@@ -83,3 +98,4 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
