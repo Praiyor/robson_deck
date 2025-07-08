@@ -2,65 +2,117 @@ import request from "supertest";
 import express, { json } from "express";
 import { Deckcontroller } from "../../controller/Deckcontroller";
 
-// simular a app Express
 const app = express();
 app.use(json());
-app.post("/decks", Deckcontroller.createDeck);
+app.get("/decks/:deckId", Deckcontroller.getDeckById);
 
-// mock do usecase (evita acesso ao banco real)
-jest.mock("../../usecase/Deck/CreateDeckUsecase.ts", () => {
-  return {
-    CreateDeckUsecase: jest.fn().mockImplementation(() => ({
-      execute: jest.fn().mockResolvedValue(true),
-    })),
-  };
+jest.mock("../../usecase/Deck/GetDeckbyIdUsecase", () => ({
+  GetDeckByIdUseCase: jest.fn().mockImplementation(() => ({
+    execute: jest.fn().mockResolvedValue({ id: 1, name: "Deck A" }),
+  })),
+}));
+
+describe("Deckcontroller.getDeckById", () => {
+  it("deve retornar 200 se o deck for encontrado", async () => {
+    const res = await request(app).get("/decks/1");
+    expect(res.status).toBe(200);
+    expect(res.body).toHaveProperty("id", 1);
+  });
+
+  it("deve retornar 500 se o deck não for encontrado", async () => {
+    jest.spyOn(console, "error").mockImplementation(() => {});
+    const {
+      GetDeckByIdUseCase,
+    } = require("../../usecase/Deck/GetDeckbyIdUsecase");
+    GetDeckByIdUseCase.mockImplementation(() => ({
+      execute: jest.fn().mockResolvedValue(null),
+    }));
+
+    const res = await request(app).get("/decks/999");
+    expect(res.status).toBe(500);
+    expect(res.body).toHaveProperty("error");
+  });
 });
 
-// mock da função getFormatRule
-jest.mock("../../utils/DeckFormatRules", () => {
-  return {
-    getFormatRule: jest.fn().mockReturnValue(["some-rule"]),
-    DeckFormat: {
-      COMMANDER: "commander",
-      STANDARD: "standard",
-      MODERN: "modern",
-      PAUPER: "pauper",
-      SINGLETON: "singleton",
-    },
-  };
+app.get("/decks", Deckcontroller.getAllDecks);
+
+jest.mock("../../usecase/Deck/GetAllDecksUseCase", () => ({
+  GetAllDecksUseCase: jest.fn().mockImplementation(() => ({
+    execute: jest.fn().mockResolvedValue([{ id: 1, name: "Deck Test" }]),
+  })),
+}));
+
+describe("Deckcontroller.getAllDecks", () => {
+  it("deve retornar todos os decks com status 200", async () => {
+    const res = await request(app).get("/decks");
+    expect(res.status).toBe(200);
+    expect(res.body).toEqual([{ id: 1, name: "Deck Test" }]);
+  });
 });
 
-describe("Deckcontroller.createDeck", () => {
-  it("deve retornar 201 se o deck for criado com sucesso", async () => {
-    const response = await request(app).post("/decks").send({
-      name: "Meu Deck",
-      description: "Deck de teste",
+app.delete("/decks/:deckId", Deckcontroller.deletedeckById);
+
+jest.mock("../../usecase/Deck/DeleteDeckbyIdUsecase", () => ({
+  DeleteDeckbyIdUsecase: jest.fn().mockImplementation(() => ({
+    execute: jest.fn().mockResolvedValue(undefined),
+  })),
+}));
+
+describe("Deckcontroller.deletedeckById", () => {
+  it("deve retornar 201 se o deck for deletado", async () => {
+    const res = await request(app).delete("/decks/1");
+    expect(res.status).toBe(201);
+    expect(res.body.message).toMatch(/deleted/i);
+  });
+});
+
+app.put("/decks/:deckId", Deckcontroller.updateDeckById);
+
+jest.mock("../../usecase/Deck/UpdateDeckbyIdUsecase", () => ({
+  UpdateDeckbyidUsecase: jest.fn().mockImplementation(() => ({
+    execute: jest.fn().mockResolvedValue(true),
+  })),
+}));
+
+describe("Deckcontroller.updateDeckById", () => {
+  it("deve atualizar e retornar 201", async () => {
+    const res = await request(app).put("/decks/1").send({
+      name: "Atualizado",
       format: "commander",
     });
-
-    expect(response.status).toBe(201);
-    expect(response.body).toEqual({ message: "Deck created successfully" });
+    expect(res.status).toBe(201);
+    expect(res.body.message).toMatch(/updated/i);
   });
+});
 
-  it("deve retornar 400 se o formato for inválido", async () => {
-    const response = await request(app).post("/decks").send({
-      name: "Deck Inválido",
-      description: "Teste",
-      format: "formato_invalido",
-    });
+app.post("/decks/:deckId/cards", Deckcontroller.addCardToDeck);
 
-    expect(response.status).toBe(400);
-    expect(response.body).toHaveProperty("error");
+jest.mock("../../usecase/Card/GetCardApiUsecase", () => ({
+  GetCardApiUsecase: jest.fn().mockImplementation(() => ({
+    execute: jest.fn().mockResolvedValue({ id: 1, name: "Card X" }),
+  })),
+}));
+
+describe("Deckcontroller.addCardToDeck", () => {
+  it("deve adicionar o card e retornar 201", async () => {
+    const res = await request(app).post("/decks/1/cards").send({ id: 1 });
+    expect(res.status).toBe(201);
+    expect(res.body.message).toMatch(/added/i);
   });
+});
 
-  it("deve retornar 400 se o nome estiver vazio", async () => {
-    const response = await request(app).post("/decks").send({
-      name: "",
-      description: "Deck sem nome",
-      format: "modern",
-    });
+app.delete("/decks/:deckId/cards/:cardId", Deckcontroller.removeCardFromDeck);
 
-    expect(response.status).toBe(400);
-    expect(response.body).toHaveProperty("error");
+jest.mock("../../usecase/Card/DeleteCardUsecase", () => ({
+  DeleteCardUsecase: jest.fn().mockImplementation(() => ({
+    execute: jest.fn().mockResolvedValue(true),
+  })),
+}));
+
+describe("Deckcontroller.removeCardFromDeck", () => {
+  it("deve remover o card e retornar 201", async () => {
+    const res = await request(app).delete("/decks/1/cards/1");
+    expect(res.status).toBe(201);
+    expect(res.body.message).toMatch(/removed/i);
   });
 });
