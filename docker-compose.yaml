@@ -1,17 +1,158 @@
-version: '3.8'
+version: '3'
 
 services:
-  postgres:
+  postgres_cards:
     image: postgres:15
-    container_name: postgres_container
+    container_name: postgres_cards_container
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: robson_cards
+    volumes:
+      - pgdata_cards:/var/lib/postgresql/data
+    networks:
+      - robson-network
+
+  postgres_venda:
+    image: postgres:15
+    container_name: postgres_venda_container
+    ports:
+      - "5435:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: robsonVende
+    volumes:
+      - pgdata_venda:/var/lib/postgresql/data
+    networks:
+      - robson-network
+
+  postgres_decks:
+    image: postgres:15
+    container_name: postgres_decks_container
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_USER: pryor
-      POSTGRES_PASSWORD: robson
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
       POSTGRES_DB: robsonDeck
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - pgdata_decks:/var/lib/postgresql/data
+    networks:
+      - robson-network
+
+  postgres_auth:
+    image: postgres:15
+    container_name: postgres_auth_container
+    ports:
+      - "5434:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: auth
+    volumes:
+      - pgdata_auth:/var/lib/postgresql/data
+    networks:
+      - robson-network
+
+  auth-service:
+    build: ./Authentication-Robson
+    container_name: auth-service
+    ports:
+      - "8081:8080"
+    depends_on:
+      - postgres_auth
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres_auth:5432/auth
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+    networks:
+      - robson-network
+
+  card-service:
+    build: ./Robson_Cards
+    container_name: card-service
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./Robson_Cards:/app
+    depends_on:
+      - postgres_cards
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@postgres_cards:5432/robson_cards
+    command: >
+      sh -c "npx prisma migrate deploy && npm run start"
+    networks:
+      - robson-network
+
+  decks-service:
+    build: ./robson_deck
+    container_name: decks-service
+    ports:
+      - "4052:4052"
+    depends_on:
+      - postgres_decks
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@postgres_decks:5432/robsonDeck
+    command: >
+      sh -c "npx prisma migrate deploy && npm run dev"
+    networks:
+      - robson-network
+
+  venda-service:
+    build: ./robson_vende
+    container_name: venda-service
+    ports:
+      - "9455:9455"
+    depends_on:
+      - postgres_venda
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@postgres_venda:5432/robsonVende
+    command: >
+      sh -c "npx prisma migrate deploy && npm run dev"
+    networks:
+      - robson-network
+
+  gateway:
+    build: ./robson-api-gateway
+    container_name: api-gateway
+    depends_on:
+      - card-service
+      - decks-service
+    ports:
+      - "8080:8080"
+      - "9876:9876"
+    volumes:
+      - ./robson-api-gateway:/app
+    networks:
+      - robson-network
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    ports:
+      - '9090:9090'
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - robson-network
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - '3001:3000'
+    networks:
+      - robson-network
 
 volumes:
-  pgdata:
+  pgdata_cards:
+  pgdata_decks:
+  pgdata_auth:
+  pgdata_venda:
+
+networks:
+  robson-network:
+    driver: bridge

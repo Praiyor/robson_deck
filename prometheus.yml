@@ -1,0 +1,28 @@
+global:
+  scrape_interval: 10s
+
+scrape_configs:
+  - job_name: 'auth-service'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['auth-service:8080']
+
+  - job_name: 'vendas-service'
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: ['venda-service:9455']
+
+  - job_name: 'deck-service'
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: ['decks-service:4052']
+
+  - job_name: 'card-service'
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: ['card-service:3000']
+
+  - job_name: 'gateway'
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: ['api-gateway:8080']
