@@ -46,6 +46,9 @@ jobs:
       - name: Gerar Prisma Client
         run: npx prisma generate
 
+      - name: Gerar documentação Swagger
+        run: npm run swagger:build
+
       - name: Aplicar migrações
         run: npx prisma migrate deploy
 
